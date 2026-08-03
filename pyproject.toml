@@ -1,0 +1,10 @@
+[project]
+name = "gopherkind-protocol"
+version = "0.1.0"
+description = "Independent Python implementation of the Gopherkind kind 31436 grammar"
+requires-python = ">=3.11"
+license = "MIT"
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
