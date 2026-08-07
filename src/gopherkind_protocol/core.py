@@ -39,8 +39,32 @@ def _well_formed(value: str) -> bool:
     return not any(0xD800 <= ord(char) <= 0xDFFF for char in value)
 
 
+# SPEC.md: display text may carry SGR ("ESC [", zero or more of "0123456789;:",
+# then "m"). Those are colour and style only. Everything else that is a control
+# character becomes a space; the sequence is not removed, each character in it
+# is replaced.
+_SGR = re.compile("\x1b\\[[0-9;:]*m")
+
+
 def _clean(value: str) -> str:
+    """Replace every control character with a space (no SGR exemption)."""
     return "".join(" " if ord(char) <= 0x1F or 0x7F <= ord(char) <= 0x9F else char for char in value)
+
+
+def _has_non_sgr_control(value: str) -> bool:
+    return _has_control(_SGR.sub("", value))
+
+
+def _clean_display(value: str) -> str:
+    """Keep SGR sequences, space out every other control character."""
+    out: list[str] = []
+    index = 0
+    for match in _SGR.finditer(value):
+        out.append(_clean(value[index : match.start()]))
+        out.append(match.group(0))
+        index = match.end()
+    out.append(_clean(value[index:]))
+    return "".join(out)
 
 
 def valid_path(value: object) -> bool:
@@ -92,7 +116,7 @@ def parse_kindmap(content: str) -> list[KindmapLine]:
         record = raw[:-1] if raw.endswith("\r") else raw
         if "\t" not in record:
             display = record[1:] if record.startswith("i") else record
-            output.append(KindmapLine("i", _clean(display)))
+            output.append(KindmapLine("i", _clean_display(display)))
             continue
         heading, link, *_ignored = record.split("\t")
         item_type = heading[0] if heading else ""
@@ -102,12 +126,12 @@ def parse_kindmap(content: str) -> list[KindmapLine]:
             not printable_type
             or item_type == "i"
             or link == ""
-            or _has_control(display)
+            or _has_non_sgr_control(display)
             or _has_control(link)
         ):
-            output.append(KindmapLine("i", _clean(display)))
+            output.append(KindmapLine("i", _clean_display(display)))
         else:
-            output.append(KindmapLine(item_type, display, link))
+            output.append(KindmapLine(item_type, _clean_display(display), link))
     return output
 
 

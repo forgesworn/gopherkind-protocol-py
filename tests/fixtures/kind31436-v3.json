@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "documents": [
     {
       "name": "minimal root menu",
@@ -376,42 +376,53 @@
       ]
     },
     {
-      "name": "an escape costs an information record nothing but the escape",
+      "name": "SGR styling survives in an information record",
       "input": "\u001b[36mDonkey\u001b[0m",
       "output": [
         {
           "type": "i",
-          "display": " [36mDonkey [0m"
+          "display": "\u001b[36mDonkey\u001b[0m"
         }
       ]
     },
     {
-      "name": "an escape in a display costs the record its link",
+      "name": "SGR styling survives in a linked display, link intact",
       "input": "1\u001b[36mHome\u001b[0m\t/",
       "output": [
         {
-          "type": "i",
-          "display": " [36mHome [0m"
+          "type": "1",
+          "display": "\u001b[36mHome\u001b[0m",
+          "link": "/"
         }
       ]
     },
     {
-      "name": "a cursor control is neutralised like any other control",
-      "input": "\u001b[2Jcursor moved",
+      "name": "a non-SGR control costs the record its link and becomes a space",
+      "input": "1\u001b[2JHome\t/",
       "output": [
         {
           "type": "i",
-          "display": " [2Jcursor moved"
+          "display": " [2JHome"
         }
       ]
     },
     {
-      "name": "an escape in a link costs the record its link",
+      "name": "any control character in a link costs the record its link",
       "input": "0About\t/about\u001b[0m.txt",
       "output": [
         {
           "type": "i",
           "display": "About"
+        }
+      ]
+    },
+    {
+      "name": "SGR mixed with a non-SGR control keeps the colour, spaces the rest",
+      "input": "\u001b[32mok\u001b[2Jbad",
+      "output": [
+        {
+          "type": "i",
+          "display": "\u001b[32mok [2Jbad"
         }
       ]
     }
