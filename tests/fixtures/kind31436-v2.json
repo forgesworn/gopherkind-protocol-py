@@ -5,16 +5,7 @@
       "name": "minimal root menu",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "1"]],
         "content": ""
       },
       "valid": true,
@@ -29,24 +20,10 @@
       "event": {
         "kind": 31436,
         "tags": [
-          [
-            "d",
-            "/about.txt",
-            "ignored"
-          ],
-          [
-            "type",
-            "0",
-            "ignored"
-          ],
-          [
-            "title",
-            "About"
-          ],
-          [
-            "x-example",
-            "ignored"
-          ]
+          ["d", "/about.txt", "ignored"],
+          ["type", "0", "ignored"],
+          ["title", "About"],
+          ["x-example", "ignored"]
         ],
         "content": "hello"
       },
@@ -61,20 +38,7 @@
       "name": "empty title is valid",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/empty-title"
-          ],
-          [
-            "type",
-            "0"
-          ],
-          [
-            "title",
-            ""
-          ]
-        ],
+        "tags": [["d", "/empty-title"], ["type", "0"], ["title", ""]],
         "content": ""
       },
       "valid": true,
@@ -88,16 +52,7 @@
       "name": "wrong kind",
       "event": {
         "kind": 1,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "1"]],
         "content": ""
       },
       "valid": false
@@ -106,12 +61,7 @@
       "name": "missing d",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["type", "1"]],
         "content": ""
       },
       "valid": false
@@ -120,15 +70,7 @@
       "name": "d without a value",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d"
-          ],
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["d"], ["type", "1"]],
         "content": ""
       },
       "valid": false
@@ -137,20 +79,7 @@
       "name": "duplicate d",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "d",
-            "/other"
-          ],
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["d", "/"], ["d", "/other"], ["type", "1"]],
         "content": ""
       },
       "valid": false
@@ -159,12 +88,7 @@
       "name": "missing type",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ]
-        ],
+        "tags": [["d", "/"]],
         "content": ""
       },
       "valid": false
@@ -173,20 +97,7 @@
       "name": "duplicate type",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "0"
-          ],
-          [
-            "type",
-            "1"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "0"], ["type", "1"]],
         "content": ""
       },
       "valid": false
@@ -195,16 +106,7 @@
       "name": "unknown type",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "9"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "9"]],
         "content": ""
       },
       "valid": false
@@ -213,24 +115,7 @@
       "name": "duplicate title",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "1"
-          ],
-          [
-            "title",
-            "one"
-          ],
-          [
-            "title",
-            "two"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "1"], ["title", "one"], ["title", "two"]],
         "content": ""
       },
       "valid": false
@@ -239,20 +124,7 @@
       "name": "control character in title",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/"
-          ],
-          [
-            "type",
-            "1"
-          ],
-          [
-            "title",
-            "bad\nname"
-          ]
-        ],
+        "tags": [["d", "/"], ["type", "1"], ["title", "bad\nname"]],
         "content": ""
       },
       "valid": false
@@ -261,16 +133,7 @@
       "name": "invalid path makes the document invalid",
       "event": {
         "kind": 31436,
-        "tags": [
-          [
-            "d",
-            "/a/../b"
-          ],
-          [
-            "type",
-            "0"
-          ]
-        ],
+        "tags": [["d", "/a/../b"], ["type", "0"]],
         "content": ""
       },
       "valid": false
@@ -354,20 +217,7 @@
       "valid": false
     }
   ],
-  "distinctPaths": [
-    [
-      "/a b",
-      "/a%20b"
-    ],
-    [
-      "/CAFÉ",
-      "/CAFÉ"
-    ],
-    [
-      "/A",
-      "/a"
-    ]
-  ],
+  "distinctPaths": [["/a b", "/a%20b"], ["/CAFÉ", "/CAFÉ"], ["/A", "/a"]],
   "kindmap": [
     {
       "name": "empty content",
@@ -574,30 +424,12 @@
         {
           "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
           "created_at": 100,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         },
         {
           "id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         }
       ],
       "winner": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
@@ -610,30 +442,12 @@
         {
           "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         },
         {
           "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         }
       ],
       "winner": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -646,34 +460,12 @@
         {
           "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
           "created_at": 100,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         },
         {
           "id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ],
-            [
-              "expiration",
-              "200"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"], ["expiration", "200"]]
         }
       ],
       "winner": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
@@ -686,20 +478,7 @@
         {
           "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ],
-            [
-              "expiration",
-              "201"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"], ["expiration", "201"]]
         }
       ],
       "winner": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
@@ -712,30 +491,12 @@
         {
           "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
           "created_at": 100,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "0"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "0"]]
         },
         {
           "id": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
           "created_at": 101,
-          "tags": [
-            [
-              "d",
-              "/a"
-            ],
-            [
-              "type",
-              "9"
-            ]
-          ]
+          "tags": [["d", "/a"], ["type", "9"]]
         }
       ],
       "winner": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
