@@ -18,12 +18,12 @@ from gopherkind_protocol import (  # noqa: E402
     valid_path,
 )
 
-FIXTURE = json.loads((ROOT / "tests/fixtures/kind31436-v1.json").read_text())
+FIXTURE = json.loads((ROOT / "tests/fixtures/kind31436-v2.json").read_text())
 
 
 class PublishedFixtureTest(unittest.TestCase):
     def test_document_metadata(self) -> None:
-        self.assertEqual(FIXTURE["version"], 1)
+        self.assertEqual(FIXTURE["version"], 2)
         for vector in FIXTURE["documents"]:
             with self.subTest(vector["name"]):
                 parsed = parse_document(vector["event"])
