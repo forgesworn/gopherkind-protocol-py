@@ -1,0 +1,65 @@
+# gopherkind-protocol-py
+
+> Validating and rendering Gopherkind (Nostr kind 31436) documents needs a
+> parser for the kindmap grammar, NIP-01 replacement ordering and NIP-40
+> expiry, but the reference implementation is TypeScript. gopherkind-protocol
+> is an independent Python implementation of the same grammar, built from
+> `SPEC.md` and the published language-neutral fixture rather than by
+> translating the TypeScript source.
+
+For Python projects consuming or serving Gopherkind documents over Nostr: it
+validates document metadata and exact paths, parses kindmap lines, picks the
+NIP-01 replacement winner among same-address events, applies NIP-40 expiry,
+and renders RFC 1436 type `0` wire bodies. It starts after ordinary NIP-01
+event id and signature validation, which stays the caller's responsibility.
+No runtime dependency.
+
+## Getting Started
+
+```sh
+git clone https://github.com/forgesworn/gopherkind-protocol-py
+cd gopherkind-protocol-py
+pip install -e .
+```
+
+```python
+from gopherkind_protocol import parse_document, url_path
+
+document = parse_document(event)  # event is a NIP-01 kind 31436 event dict
+if document is not None:
+    print(document.path, document.type, document.title)
+    print(url_path(document.path))
+```
+
+## Key Concepts
+
+- `Document`: the validated `path`, `type` (`0` or `1`) and `title` from a
+  kind 31436 event's `d`, `type` and `title` tags.
+- `KindmapLine`: one parsed line of a Gopher kindmap, with `type`, `display`
+  and an optional `link`; control characters other than SGR colour codes are
+  replaced with spaces.
+- Replacement winner: among events sharing an address, NIP-01 ordering picks
+  the highest `created_at`, then the lowest event id.
+- Expiry: a `current_document` result is suppressed once its NIP-40
+  `expiration` tag has passed.
+
+## API Surface
+
+- `parse_document(event)`: validate a kind 31436 event, return a `Document`
+  or `None`.
+- `valid_path(value)`: check a string is a well-formed exact path.
+- `url_path(value)`: percent-encode each path segment without normalising it.
+- `parse_kindmap(content)`: parse kindmap text into a list of `KindmapLine`.
+- `replacement_winner(events)`: pick the NIP-01 replacement winner from an
+  iterable of events.
+- `current_document(events, now)`: winner after validation and NIP-40 expiry
+  against `now`.
+- `render_type0(content)`: render text content as an RFC 1436 type `0` wire
+  body, with dot-stuffing and the terminating `.\r\n`.
+- `DOC_KIND`: the Nostr kind constant, `31436`.
+
+## Optional
+
+- [README](README.md)
+- [forgesworn/gopherkind](https://github.com/forgesworn/gopherkind): the
+  TypeScript reference implementation and grammar spec this project follows.
