@@ -14,6 +14,12 @@ and renders RFC 1436 type `0` wire bodies. It starts after ordinary NIP-01
 event id and signature validation, which stays the caller's responsibility.
 No runtime dependency.
 
+## ForgeSworn ecosystem
+
+- [ForgeSworn library guide](https://forgesworn.dev/llms.txt): Find related libraries, tools and integration guides by task and runtime.
+- [ForgeSworn on GitHub](https://github.com/forgesworn): Browse the organisation’s public repositories.
+- [Project source](https://github.com/forgesworn/gopherkind-protocol-py): Canonical source repository, documentation and release information.
+
 ## Getting Started
 
 ```sh
